@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  attacker:
+    image: metasploitframework/metasploit-framework
+    command: sleep infinity
+    ports:
+      - "4444:4444"
+      - "8080:8080"
+    networks:
+      mynet:
+        aliases:
+          - bot
+  bot:
+    build: ./bot
+    command: sleep infinity
+    networks:
+      mynet:
+        aliases:
+          - attacker
+
+networks:
+  mynet:
+    driver: bridge
