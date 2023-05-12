@@ -5,7 +5,7 @@ services:
     container_name: gethnode-1
     hostname: gethnode-1
     environment:
-      coinbase: 0x1D371e6885D33591b574A45DDE7567BF0b092F59
+      coinbase: 1D371e6885D33591b574A45DDE7567BF0b092F59
       datadir: node1
     image: crazybun/go-eth:2023.5.12
     ports:
@@ -21,7 +21,7 @@ services:
     container_name: gethnode-2
     hostname: gethnode-2
     environment:
-      coinbase: 0x3f671A4BFA16BD278cc0a8c79eDF316363BE98A7
+      coinbase: 3f671A4BFA16BD278cc0a8c79eDF316363BE98A7
       datadir: node2
     image: crazybun/go-eth:2023.5.12
     ports:
