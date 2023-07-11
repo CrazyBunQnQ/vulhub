@@ -5,9 +5,6 @@
     <a href="https://github.com/vulhub/vulhub/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/vulhub/vulhub.svg" alt="GitHub">
     </a>
-    <a href="https://www.wangan.com/vulhub">
-      <img src="https://img.shields.io/badge/Official-Community-blue.svg" alt="Official Community">
-    </a>
     <a href="https://discord.gg/bQCpZEK">
       <img src="https://img.shields.io/discord/485505185167179778.svg" alt="Chat on Discord">
     </a>
@@ -26,23 +23,19 @@ Vulhub is an open-source collection of pre-built vulnerable docker environments.
 
 ## Installation
 
-Install the docker/docker-compose on Ubuntu 20.04:
+Install Docker on Ubuntu 22.04:
 
 ```bash
-# Install pip
-curl -s https://bootstrap.pypa.io/get-pip.py | python3
-
 # Install the latest version docker
 curl -s https://get.docker.com/ | sh
 
 # Run docker service
 systemctl start docker
-
-# Install docker compose
-pip install docker-compose
 ```
 
-The installation steps of docker and docker-compose for other operating systems might be slightly different, please refer to the [docker documentation](https://docs.docker.com/) for details.
+Note that as of April 2022, `docker compose` is merged into Docker as a subcommand as [Docker Compose V2](https://www.docker.com/blog/announcing-compose-v2-general-availability/), the Python version of docker-compose will be deprecated after June 2023. So Vulhub will no longer require the installation of additional `docker-compose`, and all documentation will be modified to use the `docker compose` instead.
+
+The installation steps of Docker and Docker Compose for other operating systems might be slightly different, please refer to the [docker documentation](https://docs.docker.com/) for details.
 
 ## Usage
 
@@ -56,10 +49,10 @@ cd vulhub-master
 cd flask/ssti
 
 # Compile environment
-docker-compose build
+docker compose build
 
 # Run environment
-docker-compose up -d
+docker compose up -d
 ```
 
 There is a **README** document in each environment directory, please read this file for vulnerability/environment testing and usage.
@@ -67,7 +60,7 @@ There is a **README** document in each environment directory, please read this f
 After the test, delete the environment with the following command.
 
 ```
-docker-compose down -v
+docker compose down -v
 ```
 
 It is recommended to use a VPS of at least 1GB memory to build a vulnerability environment. The `your-ip` mentioned in the documentation refers to the IP address of your VPS. If you are using a virtual machine, it refers to your virtual machine IP, not the IP inside the docker container.
@@ -76,8 +69,8 @@ It is recommended to use a VPS of at least 1GB memory to build a vulnerability e
 
 ## Notice
 
-1. To prevent permission errors, it is best to use the root user to execute the docker and docker-compose commands.
-2. Some docker images do not support running on ARM machines.
+1. To prevent permission errors, please ensure that the docker container has permission to access all files in the current directory.
+2. Vulhub does not support running on machines with non-x86 architecture such as ARM for now.
 
 ## Contribution
 
@@ -85,7 +78,6 @@ This project relies on docker. So any error during compilation and running are t
 
 For more question, please contact:
 
-- [Chinese Community](https://www.wangan.com/vulhub)
 - [Discord](https://discord.gg/bQCpZEK)
 - [Twitter](https://twitter.com/vulhub)
 
