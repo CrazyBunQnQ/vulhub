@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  redis:
+    build: ./redis_vul/.
+    user: root
+    networks:
+      local_network:
+        ipv4_address: 192.168.1.59
+
+  scanner:
+    build: ./hacker/.
+    volumes:
+      - ./ssh:/home/ssh
+    networks:
+      local_network:
+        ipv4_address: 192.168.1.60
+
+# docker network ls
+# docker network rm local_network
+# docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o parent=eth0 local_network
+# docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cve-2021-3129-attacker-1
+networks:
+  local_network:
+    name: local_network
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
